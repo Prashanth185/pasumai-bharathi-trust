@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="navbar">
+
+      <div class="logo">
+        <img src="images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+
+    
+
+      <a href="index.html">About Us</a>
+
+      <a href="programs.html">Programs</a>
+      <a href="contact.html">Contact</a>
+
+    </nav>
+
+  </div>
+</header>
+
+<section class="top-space">
+
+  <div class="section-title">
+    <h2>Contact Us</h2>
+    <p style="text-align:center; max-width:800px; margin: 0 auto 30px; font-size: 1.1rem; line-height:1.6;">For more information on how your contributions are utilized or to discuss financial partnerships, please contact us.</p>
+  </div>
+  
+  <div class="contact-container">
+
+    <div class="glass-card">
+
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200"
+      class="card-image">
+
+      <h3>Email</h3>
+      <p>Pasumaibharathi2020@gmail.com</p>
+
+      <h3 style="margin-top:20px;">Phone Number</h3>
+      <p>+91 9159760006</p>
+      
+      <p style="margin-top: 30px; font-weight: 500; color: #2e7d32; font-style: italic;">
+        Your trust and generosity empower us to create lasting change.
+      </p>
+
+    </div>
+
+    <form id="contact-form" class="contact-form glass-card">
+
+      <input type="text" id="contact-name" placeholder="Your Name" required>
+
+      <input type="email" id="contact-email" placeholder="Your Email" required>
+
+      <input type="text" id="contact-phone" placeholder="Your Phone (Optional)">
+
+      <textarea id="contact-message" rows="5" placeholder="Your Message" required></textarea>
+
+      <button type="submit" id="contact-submit">
+        Send Message
+      </button>
+      
+      <p id="contact-success" style="display:none; color: #2e7d32; font-weight: bold; margin-top: 15px; text-align: center;">Message sent successfully!</p>
+
+    </form>
+
+  </div>
+
+</section>
+
+<footer class="bottom-footer">
+  © 2026 Pasumai Bharathi Trust
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('contact-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    const phone = document.getElementById('contact-phone').value;
+    const message = document.getElementById('contact-message').value;
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message })
+      });
+      if (res.ok) {
+        document.getElementById('contact-success').style.display = 'block';
+        document.getElementById('contact-form').reset();
+      } else {
+        alert('Failed to send message.');
+      }
+    } catch (err) {
+      alert('Error connecting to server.');
+    } finally {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }
+  });
+</script>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Pasumai Bharathi Trust</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            background: #f4f8f2;
+            padding: 20px;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .logout-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+        
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            gap: 15px;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #ddd;
+            color: #555;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+        .tab-btn:hover {
+            border-color: #2e7d32;
+            color: #2e7d32;
+        }
+        .tab-btn.active {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        .messages-container {
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        .donations-container {
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        th {
+            background: #eef6eb;
+            color: #1b5e20;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            background: transparent;
+            border: 1px solid;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .delete-btn {
+            color: #d32f2f;
+            border-color: #d32f2f;
+        }
+        .delete-btn:hover {
+            background: #d32f2f;
+            color: white;
+        }
+        .verify-btn {
+            color: #2e7d32;
+            border-color: #2e7d32;
+        }
+        .verify-btn:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        .view-btn {
+            color: #1976d2;
+            border-color: #1976d2;
+        }
+        .view-btn:hover {
+            background: #1976d2;
+            color: white;
+        }
+        .download-btn {
+            color: #f57c00;
+            border-color: #f57c00;
+        }
+        .download-btn:hover {
+            background: #f57c00;
+            color: white;
+        }
+        .reject-btn {
+            color: #c62828;
+            border-color: #c62828;
+        }
+        .reject-btn:hover {
+            background: #c62828;
+            color: white;
+        }
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .impact-admin-card {
+            background: #eef6eb;
+            border: 1px solid rgba(46, 125, 50, 0.12);
+            border-radius: 14px;
+            padding: 24px;
+            color: #2d3b2d;
+            line-height: 1.7;
+        }
+        .file-preview {
+            margin-top: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+        .file-preview img,
+        .file-preview iframe {
+            width: 100%;
+            min-height: 320px;
+            border: 0;
+            display: block;
+            object-fit: contain;
+            background: white;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .status-pending {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .status-verified {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+        .status-rejected {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            padding: 20px;
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            color: #1b5e20;
+            font-size: 24px;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: 0.3s;
+        }
+        .close-modal:hover {
+            color: #1b5e20;
+        }
+        .donation-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .detail-label {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .detail-value {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .tab-navigation {
+                flex-wrap: wrap;
+                padding: 10px 15px;
+            }
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .table-wrap {
+                overflow-x: auto;
+            }
+            table {
+                min-width: 980px;
+            }
+            .dashboard-header {
+                padding: 18px;
+                gap: 12px;
+            }
+            .action-buttons {
+                gap: 5px;
+            }
+            .action-btn {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .donation-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-header">
+        <h2 style="color: #1b5e20;">Admin Dashboard</h2>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-navigation">
+        <button class="tab-btn active" onclick="switchTab('messages')">Contact Messages</button>
+        <button class="tab-btn" onclick="switchTab('donations')">Impact of Contribution</button>
+        <button class="tab-btn" onclick="switchTab('quick')">Quick Payment Requests</button>
+        <button class="tab-btn" onclick="switchTab('bank')">Bank Transfer / Cheque-DD Requests</button>
+    </div>
+
+    <!-- Tab Content: Contact Messages -->
+    <div id="messages-tab" class="tab-content active">
+        <div class="messages-container">
+            <h3 style="margin-bottom: 20px; color: #333;">Contact Messages</h3>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="messages-body">
+                    <!-- Messages will be loaded here -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content: Impact of Contribution -->
+    <div id="donations-tab" class="tab-content">
+        <div class="donations-container">
+            <h3 style="margin-bottom: 20px; color: #333;">Impact of Contribution</h3>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>PAN Number</th>
+                        <th>Donation Amount</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="impact-body">
+                    <!-- Impact contribution requests will be loaded here -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content: Quick Payment Requests -->
+    <div id="quick-tab" class="tab-content">
+        <div class="donations-container">
+            <h3 style="margin-bottom: 20px; color: #333;">Quick Payment Requests</h3>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>PAN Number</th>
+                        <th>Donation Amount</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="quick-body">
+                    <!-- Quick payment requests will be loaded here -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content: Bank Transfer / Cheque-DD Requests -->
+    <div id="bank-tab" class="tab-content">
+        <div class="donations-container">
+            <h3 style="margin-bottom: 20px; color: #333;">Bank Transfer / Cheque-DD Requests</h3>
+            <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>PAN Number</th>
+                        <th>Donation Amount</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bank-body">
+                    <!-- Bank transfer and cheque/DD requests will be loaded here -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Donation Details Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Donation Details</h2>
+                <button class="close-modal" onclick="closeDonationModal()">&times;</button>
+            </div>
+            <div id="donationDetailsContent">
+                <!-- Details will be populated here -->
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                <button class="action-btn verify-btn" onclick="changeStatus('verified')" id="verifyStatusBtn">Mark as Verified</button>
+                <button class="action-btn reject-btn" onclick="changeStatus('rejected')" id="rejectStatusBtn">Mark as Rejected</button>
+                <button class="action-btn download-btn" onclick="downloadAttachment()" id="downloadBtn">Download File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDonationId = null;
+        let currentDonationFile = null;
+        let currentDonationSource = null;
+        let activeDonationSource = null;
+        const donationCache = {
+            impact_contribution: [],
+            quick_payment: [],
+            bank_transfer: []
+        };
+
+        const donationTabs = {
+            donations: {
+                source: 'impact_contribution',
+                tbodyId: 'impact-body',
+                emptyText: 'No impact contribution requests yet'
+            },
+            quick: {
+                source: 'quick_payment',
+                tbodyId: 'quick-body',
+                emptyText: 'No quick payment requests yet'
+            },
+            bank: {
+                source: 'bank_transfer',
+                tbodyId: 'bank-body',
+                emptyText: 'No bank transfer or cheque/DD requests yet'
+            }
+        };
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        function formatAmount(value) {
+            const amount = String(value ?? '').replace(/[^\d.]/g, '');
+            return amount ? `Rs. ${escapeHTML(amount)}` : '-';
+        }
+
+        function getStatusHTML(status) {
+            const normalized = (status || 'pending').toLowerCase();
+            const label = normalized.charAt(0).toUpperCase() + normalized.slice(1);
+            return `<span class="status-badge status-${normalized}">${label}</span>`;
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('messages-tab').classList.remove('active');
+            document.getElementById('donations-tab').classList.remove('active');
+            document.getElementById('quick-tab').classList.remove('active');
+            document.getElementById('bank-tab').classList.remove('active');
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Fetch data for the selected tab
+            if (tabName === 'messages') {
+                fetchMessages();
+            } else if (donationTabs[tabName]) {
+                const config = donationTabs[tabName];
+                activeDonationSource = config.source;
+                fetchDonations(config.source, config.tbodyId, config.emptyText);
+            }
+        }
+
+        async function fetchMessages() {
+            const res = await fetch('/api/messages');
+            if (res.status === 401) {
+                window.location.href = '/admin/login';
+                return;
+            }
+            const data = await res.json();
+            const tbody = document.getElementById('messages-body');
+            tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No messages yet</td></tr>';
+                return;
+            }
+            
+            data.forEach(msg => {
+                const date = new Date(msg.timestamp).toLocaleString();
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${escapeHTML(msg.name)}</td>
+                    <td>${escapeHTML(msg.email)}</td>
+                    <td>${escapeHTML(msg.phone || '-')}</td>
+                    <td>${escapeHTML(msg.message)}</td>
+                    <td>${date}</td>
+                    <td><button class="action-btn delete-btn" onclick="deleteMessage(${msg.id})">Delete</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function fetchDonations(source, tbodyId, emptyText) {
+            const res = await fetch(`/api/donations-80g?source=${encodeURIComponent(source)}`);
+            if (res.status === 401) {
+                window.location.href = '/admin/login';
+                return;
+            }
+            const data = await res.json();
+            donationCache[source] = data;
+            const tbody = document.getElementById(tbodyId);
+            tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #999;">${emptyText}</td></tr>`;
+                return;
+            }
+            
+            data.forEach(donation => {
+                const date = new Date(donation.timestamp).toLocaleString();
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${escapeHTML(donation.fullName)}</td>
+                    <td>${escapeHTML(donation.email)}</td>
+                    <td>${escapeHTML(donation.mobile)}</td>
+                    <td>${escapeHTML(donation.panCard)}</td>
+                    <td>${formatAmount(donation.donationAmount)}</td>
+                    <td>${escapeHTML(donation.paymentMethod)}</td>
+                    <td>${getStatusHTML(donation.verificationStatus)}</td>
+                    <td>${date}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view-btn" onclick="viewDonationDetails(${donation.id})">View</button>
+                            <button class="action-btn verify-btn" onclick="updateDonationStatus(${donation.id}, 'verified')">Verify</button>
+                            <button class="action-btn reject-btn" onclick="updateDonationStatus(${donation.id}, 'rejected')">Reject</button>
+                            <button class="action-btn delete-btn" onclick="deleteDonation(${donation.id})">Delete</button>
+                            ${donation.paymentScreenshot ? `<button class="action-btn download-btn" onclick="downloadFile('${escapeHTML(donation.paymentScreenshot)}')">Download</button>` : '<span style="color: #777; font-size: 12px; font-weight: 600;">No File Uploaded</span>'}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function findDonation(donationId) {
+            return Object.values(donationCache).flat().find(d => d.id === donationId);
+        }
+
+        async function viewDonationDetails(donationId) {
+            const donation = findDonation(donationId);
+            
+            if (!donation) return;
+            
+            currentDonationId = donationId;
+            currentDonationFile = donation.paymentScreenshot || null;
+            currentDonationSource = donation.form_source || activeDonationSource;
+            
+            const fileUrl = donation.paymentScreenshot ? `/uploads/${encodeURIComponent(donation.paymentScreenshot)}` : '';
+            const isPdf = donation.paymentScreenshot && donation.paymentScreenshot.toLowerCase().endsWith('.pdf');
+            const previewHTML = donation.paymentScreenshot ? `
+                    <div style="grid-column: 1 / -1;">
+                        <span class="detail-label">Screenshot Upload Preview</span>
+                        <div class="file-preview">
+                            ${isPdf
+                                ? `<iframe src="${fileUrl}" title="Payment proof PDF preview"></iframe>`
+                                : `<img src="${fileUrl}" alt="Payment proof preview">`}
+                        </div>
+                    </div>
+                    ` : `
+                    <div style="grid-column: 1 / -1;">
+                        <span class="detail-label">Screenshot Upload Preview</span>
+                        <span class="detail-value">No File Uploaded</span>
+                    </div>`;
+            
+            const detailsHTML = `
+                <div class="donation-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Full Name</span>
+                        <span class="detail-value">${escapeHTML(donation.fullName)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value">${escapeHTML(donation.email)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Mobile Number</span>
+                        <span class="detail-value">${escapeHTML(donation.mobile)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">PAN Card Number</span>
+                        <span class="detail-value">${escapeHTML(donation.panCard)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Donation Amount</span>
+                        <span class="detail-value">${formatAmount(donation.donationAmount)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Payment Method</span>
+                        <span class="detail-value">${escapeHTML(donation.paymentMethod)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Transaction ID</span>
+                        <span class="detail-value">${escapeHTML(donation.transactionId)}</span>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span class="detail-label">Full Address</span>
+                        <span class="detail-value">${escapeHTML(donation.address)}</span>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span class="detail-label">Current Status</span>
+                        ${getStatusHTML(donation.verificationStatus)}
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span class="detail-label">Submission Date</span>
+                        <span class="detail-value">${new Date(donation.timestamp).toLocaleString()}</span>
+                    </div>
+                    ${previewHTML}
+                </div>
+            `;
+            
+            document.getElementById('donationDetailsContent').innerHTML = detailsHTML;
+            
+            // Show/hide buttons based on status
+            const verifyBtn = document.getElementById('verifyStatusBtn');
+            const rejectBtn = document.getElementById('rejectStatusBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (donation.verificationStatus === 'verified') {
+                verifyBtn.disabled = true;
+                verifyBtn.style.opacity = '0.5';
+            } else {
+                verifyBtn.disabled = false;
+                verifyBtn.style.opacity = '1';
+            }
+            if (donation.verificationStatus === 'rejected') {
+                rejectBtn.disabled = true;
+                rejectBtn.style.opacity = '0.5';
+            } else {
+                rejectBtn.disabled = false;
+                rejectBtn.style.opacity = '1';
+            }
+            
+            if (donation.paymentScreenshot) {
+                downloadBtn.style.display = 'block';
+            } else {
+                downloadBtn.style.display = 'none';
+            }
+            
+            document.getElementById('donationModal').classList.add('active');
+        }
+
+        function closeDonationModal() {
+            document.getElementById('donationModal').classList.remove('active');
+            currentDonationId = null;
+            currentDonationFile = null;
+            currentDonationSource = null;
+        }
+
+        async function changeStatus(status) {
+            if (!currentDonationId) return;
+            await updateDonationStatus(currentDonationId, status, true);
+        }
+
+        async function updateDonationStatus(donationId, status, fromModal = false) {
+            if (!donationId) return;
+            
+            const confirmMsg = status === 'verified' 
+                ? 'Mark this 80G certificate request as verified?' 
+                : 'Mark this 80G certificate request as rejected?';
+            
+            if (!confirm(confirmMsg)) return;
+            
+            const res = await fetch(`/api/donations-80g/${donationId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ verificationStatus: status })
+            });
+            
+            if (res.ok) {
+                alert(`Request marked as ${status}!`);
+                if (fromModal) closeDonationModal();
+                refreshActiveDonationTab();
+            } else {
+                alert('Failed to update status');
+            }
+        }
+
+        async function downloadFile(filename) {
+            window.open(`/uploads/${encodeURIComponent(filename)}`, '_blank');
+        }
+
+        function downloadAttachment() {
+            if (currentDonationFile) {
+                downloadFile(currentDonationFile);
+            }
+        }
+
+        async function deleteDonation(id) {
+            if (!confirm('Are you sure you want to delete this 80G certificate request?')) return;
+            const res = await fetch(`/api/donations-80g/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                if (currentDonationId === id) closeDonationModal();
+                refreshActiveDonationTab();
+            } else {
+                alert('Failed to delete request');
+            }
+        }
+
+        function refreshActiveDonationTab() {
+            const source = currentDonationSource || activeDonationSource;
+            const tabEntry = Object.values(donationTabs).find(tab => tab.source === source);
+            if (tabEntry) {
+                fetchDonations(tabEntry.source, tabEntry.tbodyId, tabEntry.emptyText);
+            }
+        }
+
+        async function deleteMessage(id) {
+            if (!confirm('Are you sure you want to delete this message?')) return;
+            const res = await fetch(`/api/messages/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                fetchMessages();
+            } else {
+                alert('Failed to delete message');
+            }
+        }
+
+        async function logout() {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/admin/login';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('donationModal');
+            if (e.target === modal) {
+                closeDonationModal();
+            }
+        });
+
+        // Initial fetch
+        fetchMessages();
+    </script>
+</body>
+</html>

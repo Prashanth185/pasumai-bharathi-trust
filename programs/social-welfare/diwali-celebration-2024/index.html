@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diwali Celebration 2024 | Pasumai Bharathi Trust</title>
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+        <img src="../../../images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+
+      <a href="../../../index.html">About Us</a>
+      <a href="../../../programs.html">Programs</a>
+      <a href="../../../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="event-page">
+  <section class="event-banner">
+    <div class="event-banner-text">
+      <span class="event-tag">Social Welfare</span>
+      <h1>Diwali Celebration & Gift Distribution</h1>
+      <p class="event-meta">29 October 2024 | Melattur Village, Thanjavur</p>
+      <p class="event-description">
+        Distributed gifts and essential items to families and children during Diwali celebrations, sharing joy and care with the local community.
+      </p>
+    </div>
+  </section>
+
+  <section class="event-details section-card">
+    <div class="section-title">
+      <h2>Event Highlights</h2>
+    </div>
+    <div class="event-summary">
+      <div class="summary-card">
+        <h3>Community Support</h3>
+        <p>Provided gift packs and daily essentials to underprivileged families across Melattur village.</p>
+      </div>
+      <div class="summary-card">
+        <h3>Children's Joy</h3>
+        <p>Engaged with children through celebration activities and ensured each child received a special gift.</p>
+      </div>
+      <div class="summary-card">
+        <h3>Local Partnership</h3>
+        <p>Worked with village volunteers and local organizers to reach families in need efficiently.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  
+
+  <!-- SECTION 2: Photo Gallery -->
+    <!-- SECTION 2: Photo Gallery -->
+  <section class="gallery-section section-card">
+    <div class="section-title"><h2>Photos</h2></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/1778686865566.jpg" alt="1778686865566.jpg"><div class="gallery-caption">1778686865566.jpg</div></div>
+      <div class="gallery-item"><img src="images/1778755543003.png" alt="1778755543003.png"><div class="gallery-caption">1778755543003.png</div></div>
+      <div class="gallery-item"><img src="images/1778755543019.png" alt="1778755543019.png"><div class="gallery-caption">1778755543019.png</div></div>
+      <div class="gallery-item"><img src="images/1778755543050.png" alt="1778755543050.png"><div class="gallery-caption">1778755543050.png</div></div>
+      <div class="gallery-item"><img src="images/1778755543084.png" alt="1778755543084.png"><div class="gallery-caption">1778755543084.png</div></div>
+      <div class="gallery-item"><img src="images/1778755543112.png" alt="1778755543112.png"><div class="gallery-caption">1778755543112.png</div></div>
+      <div class="gallery-item"><img src="images/1778755543128.jpg" alt="1778755543128.jpg"><div class="gallery-caption">1778755543128.jpg</div></div>
+      <div class="gallery-item"><img src="images/Airbrush-IMAGE-ENHANCER-1778684564037-1778684564038.jpg" alt="Airbrush-IMAGE-ENHANCER-1778684564037-1778684564038.jpg"><div class="gallery-caption">Airbrush-IMAGE-ENHANCER-1778684564037-1778684564038.jpg</div></div>
+      <div class="gallery-item"><img src="images/enhanced-1778685131635.png" alt="enhanced-1778685131635.png"><div class="gallery-caption">enhanced-1778685131635.png</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Video Gallery -->
+  <section class="video-section section-card">
+    <div class="section-title"><h2>Video Gallery</h2></div>
+    <div class="video-grid">
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20241029-WA0012.mp4"></video><div class="gallery-caption">VID-20241029-WA0012.mp4</div></div>
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20241029-WA0015.mp4"></video><div class="gallery-caption">VID-20241029-WA0015.mp4</div></div>
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20251019-WA0001.mp4"></video><div class="gallery-caption">VID-20251019-WA0001.mp4</div></div>
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20251019-WA0002.mp4"></video><div class="gallery-caption">VID-20251019-WA0002.mp4</div></div>
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20251019-WA0004.mp4"></video><div class="gallery-caption">VID-20251019-WA0004.mp4</div></div>
+      <div class="video-card"><video controls preload="metadata"><source src="videos/VID-20251019-WA0007.mp4"></video><div class="gallery-caption">VID-20251019-WA0007.mp4</div></div>
+    </div>
+  </section>
+
+  </main>
+
+<footer>
+  © 2026 Pasumai Bharathi Trust
+</footer>
+
+<script>
+  // Try alternate image extensions (.jpg <-> .jpeg) before showing SVG fallback
+  function tryAlt(img) {
+    try {
+      if (!img || img.dataset.tried) {
+        img.onerror = null;
+        img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%23f1f8e9'/><text x='20' y='170' font-size='18' fill='%23333333'>Image not found</text></svg>";
+        return;
+      }
+      img.dataset.tried = '1';
+      var src = img.getAttribute('src') || '';
+      if (src.match(/\.jpg$/i)) {
+        img.src = src.replace(/\.jpg$/i, '.jpeg');
+      } else if (src.match(/\.jpeg$/i)) {
+        img.src = src.replace(/\.jpeg$/i, '.jpg');
+      } else if (src.indexOf('.') === -1) {
+        // try adding .jpeg
+        img.src = src + '.jpeg';
+      } else {
+        img.onerror = null;
+        img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='100%' height='100%' fill='%23f1f8e9'/><text x='20' y='170' font-size='18' fill='%23333333'>Image not found</text></svg>";
+      }
+    } catch (e) {
+      img.onerror = null;
+    }
+  }
+</script>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+
+</body>
+</html>
+

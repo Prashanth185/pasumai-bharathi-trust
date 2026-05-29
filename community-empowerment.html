@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Empowerment | Pasumai Bharathi Trust</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+    
+      <a href="index.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="program-page">
+  <section class="top-space section-card">
+    <div class="section-title">
+      <h2>Community Empowerment Programs</h2>
+    </div>
+
+    <!-- Place cover.jpg at programs/community-empowerment/<event-folder>/images/cover.jpg -->
+    <!-- Place gallery images at programs/community-empowerment/<event-folder>/images/photo1.jpg etc. -->
+    <div class="card-grid">
+
+      <a class="event-card" href="programs/community-empowerment/independence-day-celebration/index.html">
+        <img src="programs/community-empowerment/independence-day-celebration/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Independence Day Celebration with Students</h3>
+        <p class="meta">Government School, Nambivayal</p>
+        <p class="summary">Celebration and activities with students to build civic awareness.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/community-empowerment/womens-day-celebration/index.html">
+        <img src="programs/community-empowerment/womens-day-celebration/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Women’s Day Celebration</h3>
+        <p class="meta">Chintadripet, Chennai — 08.03.2021</p>
+        <p class="summary">Events to honor and support women in local communities.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Pasumai Bharathi Trust
+</footer>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environmental Conservation | Pasumai Bharathi Trust</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+
+      <a href="index.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="program-page">
+  <section class="top-space section-card">
+    <div class="section-title">
+      <h2>Environmental Conservation Programs</h2>
+    </div>
+
+    <!-- Event cards: each card links to the event folder index.html -->
+    <!-- Place cover.jpg and gallery media inside each event folder: images/cover.jpg, images/photo1.jpg, videos/video1.mp4 -->
+    <div class="card-grid">
+
+      <a class="event-card" href="programs/environmental-conservation/environmental-awareness-program/index.html">
+        <img src="programs/environmental-conservation/environmental-awareness-program/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Environmental Conservation Awareness Program</h3>
+        <p class="meta">Prist University, Thanjavur</p>
+        <p class="summary">Awareness sessions and workshops to promote sustainable living.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/environmental-conservation/tree-sapling-distribution/index.html">
+        <img src="programs/environmental-conservation/tree-sapling-distribution/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Tree Sapling Distribution Event</h3>
+        <p class="meta">Government High School, Nambivayal — 19.01.2023</p>
+        <p class="summary">Distributed saplings to students and local communities.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/environmental-conservation/seed-ball-preparation/index.html">
+        <img src="programs/environmental-conservation/seed-ball-preparation/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Seed Ball Preparation Activity</h3>
+        <p class="meta">Palamuthi Village, Pattukkottai — 04.03.2023</p>
+        <p class="summary">Community-led seed ball making for afforestation.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/environmental-conservation/save-native-breeds-rally/index.html">
+        <img src="programs/environmental-conservation/save-native-breeds-rally/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Save Native Breeds Rally</h3>
+        <p class="meta">Pattukkottai, Thanjavur District — 13.01.2017</p>
+        <p class="summary">Pasumai Bharathi Trust organized the Save Native Breeds Rally at Pattukkottai, Thanjavur District, to create awareness about protecting indigenous cattle breeds and promoting sustainable agriculture.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Pasumai Bharathi Trust
+</footer>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gaja Cyclone Relief | Pasumai Bharathi Trust</title>
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+<header>
+  <div class="navbar">
+    <div class="logo">
+        <img src="../../../images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+
+
+      <a href="../../../index.html">About Us</a>
+      <a href="../../../programs.html">Programs</a>
+      <a href="../../../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="event-page">
+  <nav class="breadcrumb">
+    <a href="../../../index.html">Home</a> ›
+    <a href="../../../programs.html">Programs</a> ›
+    <a href="../">Social Welfare</a> ›
+    <span>Gaja Cyclone Relief Materials Distribution</span>
+  </nav>
+  <section class="section-card">
+    <h1>Gaja Cyclone Relief Materials Distribution</h1>
+    <p class="event-meta">Keluvathur Village, Thiruvarur — Nov 2018</p>
+    <p><!-- Short description --> Distributed relief materials to affected communities during Cyclone Gaja.</p>
+  </section>
+  <section class="gallery-section section-card">
+    <div class="section-title"><h2>Photos</h2></div>
+    <div class="gallery-grid">
+      <img src="images/cover.jpg" alt="cover">
+      <img src="images/photo1.jpg" alt="photo1">
+      <img src="images/photo2.jpg" alt="photo2">
+    </div>
+  </section>
+  <section class="video-section section-card">
+    <div class="section-title"><h2>Videos</h2></div>
+    <div class="video-box"><video controls><source src="videos/video1.mp4" type="video/mp4"></video></div>
+  </section>
+</main>
+<footer>© 2026 Pasumai Bharathi Trust</footer>
+<script src="../../../gallery-loader.js"></script>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const videoGrid = document.querySelector('.video-grid');
+    if (!videoGrid) return;
+    const cards = videoGrid.querySelectorAll('.video-card');
+    if (cards.length > 0) {
+      videoGrid.removeChild(cards[cards.length - 1]);
+    }
+  }, 500);
+});
+</script>
+</body>
+</html>

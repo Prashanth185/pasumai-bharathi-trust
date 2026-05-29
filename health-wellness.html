@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health & Wellness | Pasumai Bharathi Trust</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+        <img src="images/logo.jpeg" alt="Pasumai Trust Logo">
+      </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links" id="mobileMenu">
+   
+      <a href="index.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="program-page">
+  <section class="top-space section-card">
+    <div class="section-title">
+      <h2>Health & Wellness Programs</h2>
+    </div>
+
+    <!-- Place cover images at programs/health-wellness/<event-folder>/images/cover.jpg -->
+    <div class="card-grid">
+
+      <a class="event-card" href="programs/health-wellness/thyroid-awareness-camp/index.html">
+        <img src="programs/health-wellness/thyroid-awareness-camp/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Free Medical Camp & Thyroid Awareness</h3>
+        <p class="meta">Vettikadu Village, Pattukkottai</p>
+        <p class="summary">Health camp offering thyroid checks and consultations.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/health-wellness/gaja-cyclone-medical-camp/index.html">
+        <img src="programs/health-wellness/gaja-cyclone-medical-camp/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Free Medical Camp During Gaja Cyclone</h3>
+        <p class="meta">Pattukkottai, Thanjavur — 16.12.2018</p>
+        <p class="summary">Emergency medical support during cyclone relief efforts.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/health-wellness/dengue-awareness-camp/index.html">
+        <img src="programs/health-wellness/dengue-awareness-camp/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Dengue Awareness Health Camp</h3>
+        <p class="meta">Vadanemmeli Village, Chengalpattu — 20.10.2019</p>
+        <p class="summary">Community awareness and preventive measures for dengue.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/health-wellness/world-health-day-camp/index.html">
+        <img src="programs/health-wellness/world-health-day-camp/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>World Health Day Free Medical Camp</h3>
+        <p class="meta">Mahabalipuram, Chengalpattu — 07.04.2024</p>
+        <p class="summary">Free medical camp to provide healthcare support for local communities.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+      <a class="event-card" href="programs/health-wellness/occupational-health-safety-medical-camp/index.html">
+        <img src="programs/health-wellness/occupational-health-safety-medical-camp/images/cover.jpg" alt="Event Cover" class="event-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%23e8f5e9/><text x=%2230%22 y=%22240%22 font-size=%2232%22 fill=%23333333%22>Cover not found</text></svg>'">
+        <h3>Occupational Health & Safety Medical Camp</h3>
+        <p class="meta">Ambattur, Chennai — 11.11.2017</p>
+        <p class="summary">Pasumai Bharathi Trust conducted an Occupational Health & Safety Medical Camp at Ambattur, Chennai, providing health awareness and medical support for workers and local communities.</p>
+        <button class="btn">View Gallery</button>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  Â© 2026 Pasumai Bharathi Trust
+</footer>
+<script>
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
