@@ -564,6 +564,8 @@
   </div>
 
   <script>
+    const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
+
     // Function to open the 80G Certificate Form
     function openForm80G(paymentMethod = "", formSource = "quick_payment") {
       const form80GModal = document.getElementById("form80GModal");
@@ -588,7 +590,7 @@
       const message = document.getElementById('about-contact-message').value;
 
       try {
-        const res = await fetch('/api/contact', {
+        const res = await fetch(`${API_BASE_URL}/api/contact`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, phone, message })
@@ -692,7 +694,7 @@
         }
 
         try {
-          const response = await fetch("/api/donation-80g", {
+          const response = await fetch(`${API_BASE_URL}/api/donation-80g`, {
             method: "POST",
             body: formData
           });

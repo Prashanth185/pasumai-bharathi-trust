@@ -91,6 +91,8 @@
 </footer>
 
 <script>
+  const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
+
   document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('contact-submit');
@@ -103,7 +105,7 @@
     const message = document.getElementById('contact-message').value;
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, message })

@@ -160,20 +160,23 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
+
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            const res = await fetch('/api/login', {
+            const res = await fetch(`${API_BASE_URL}/api/login`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
             const data = await res.json();
             if (data.success) {
-                window.location.href = '/admin/dashboard';
+                window.location.href = 'admin-dashboard.html';
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }

@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
+
     // Dynamically load images if running on Live Server
     try {
-      const response = await fetch('images/');
+      const response = await fetch(`${API_BASE_URL}/images/`);
       if (response.ok) {
         const text = await response.text();
         const parser = new DOMParser();
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const cleanUrl = decodeURIComponent(img.split('/').pop());
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.innerHTML = `<img src="images/${cleanUrl}" alt="${cleanUrl}" onerror="this.style.display='none'"><div class="gallery-caption">${cleanUrl}</div>`;
+                    item.innerHTML = `<img src="${API_BASE_URL}/images/${cleanUrl}" alt="${cleanUrl}" onerror="this.style.display='none'"><div class="gallery-caption">${cleanUrl}</div>`;
                     galleryGrid.appendChild(item);
                 });
             } else {
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Dynamically load videos
     try {
-      const response = await fetch('videos/');
+      const response = await fetch(`${API_BASE_URL}/videos/`);
       if (response.ok) {
         const text = await response.text();
         const parser = new DOMParser();
@@ -62,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const cleanUrl = decodeURIComponent(vid.split('/').pop());
                     const item = document.createElement('div');
                     item.className = 'video-card';
-                    item.innerHTML = `<video controls preload="metadata"><source src="videos/${cleanUrl}"></video><div class="gallery-caption">${cleanUrl}</div>`;
+                    item.innerHTML = `<video controls preload="metadata"><source src="${API_BASE_URL}/videos/${cleanUrl}"></video><div class="gallery-caption">${cleanUrl}</div>`;
                     videoGrid.appendChild(item);
                 });
             } else {

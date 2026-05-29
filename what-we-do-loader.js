@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
+
     try {
-        const response = await fetch("images/what-we-do/");
+        const response = await fetch(`${API_BASE_URL}/images/what-we-do/`);
         if (response.ok) {
             const text = await response.text();
             const parser = new DOMParser();
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     
                     const item = document.createElement("div");
                     item.className = "info-card";
-                    item.innerHTML = `<img src="images/what-we-do/${cleanUrl}" class="card-image" alt="${title}">
+                    item.innerHTML = `<img src="${API_BASE_URL}/images/what-we-do/${cleanUrl}" class="card-image" alt="${title}">
                                       <h3>${title}</h3>`;
                     grid.appendChild(item);
                 });
