@@ -54,17 +54,6 @@
 function toggleMenu() {
   document.getElementById("mobileMenu").classList.toggle("active");
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const videoGrid = document.querySelector('.video-grid');
-    if (!videoGrid) return;
-    const cards = videoGrid.querySelectorAll('.video-card');
-    if (cards.length > 0) {
-      videoGrid.removeChild(cards[cards.length - 1]);
-    }
-  }, 500);
-});
 </script>
 </body>
 </html>

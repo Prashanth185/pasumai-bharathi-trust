@@ -9,7 +9,6 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5501;
-const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER;
 
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, 'uploads');
@@ -43,17 +42,14 @@ const upload = multer({
 });
 
 // Middleware
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: 'pasumai-bharathi-secret-key-123',
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax'
-    }
+    cookie: { secure: false } // Set to true if using https
 }));
 
 // Database Setup
@@ -401,5 +397,5 @@ app.use((req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server is running on https://pasumai-bharathi-trust.onrender.com`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

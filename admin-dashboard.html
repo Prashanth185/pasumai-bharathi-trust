@@ -457,7 +457,6 @@
     </div>
 
     <script>
-        const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
         let currentDonationId = null;
         let currentDonationFile = null;
         let currentDonationSource = null;
@@ -535,9 +534,9 @@
         }
 
         async function fetchMessages() {
-            const res = await fetch(`${API_BASE_URL}/api/messages`, { credentials: 'include' });
+            const res = await fetch('/api/messages');
             if (res.status === 401) {
-                window.location.href = 'admin-login.html';
+                window.location.href = '/admin/login';
                 return;
             }
             const data = await res.json();
@@ -565,9 +564,9 @@
         }
 
         async function fetchDonations(source, tbodyId, emptyText) {
-            const res = await fetch(`${API_BASE_URL}/api/donations-80g?source=${encodeURIComponent(source)}`, { credentials: 'include' });
+            const res = await fetch(`/api/donations-80g?source=${encodeURIComponent(source)}`);
             if (res.status === 401) {
-                window.location.href = 'admin-login.html';
+                window.location.href = '/admin/login';
                 return;
             }
             const data = await res.json();
@@ -620,7 +619,7 @@
             currentDonationFile = donation.paymentScreenshot || null;
             currentDonationSource = donation.form_source || activeDonationSource;
             
-            const fileUrl = donation.paymentScreenshot ? `${API_BASE_URL}/uploads/${encodeURIComponent(donation.paymentScreenshot)}` : '';
+            const fileUrl = donation.paymentScreenshot ? `/uploads/${encodeURIComponent(donation.paymentScreenshot)}` : '';
             const isPdf = donation.paymentScreenshot && donation.paymentScreenshot.toLowerCase().endsWith('.pdf');
             const previewHTML = donation.paymentScreenshot ? `
                     <div style="grid-column: 1 / -1;">
@@ -735,9 +734,8 @@
             
             if (!confirm(confirmMsg)) return;
             
-            const res = await fetch(`${API_BASE_URL}/api/donations-80g/${donationId}`, {
+            const res = await fetch(`/api/donations-80g/${donationId}`, {
                 method: 'PUT',
-                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ verificationStatus: status })
             });
@@ -752,7 +750,7 @@
         }
 
         async function downloadFile(filename) {
-            window.open(`${API_BASE_URL}/uploads/${encodeURIComponent(filename)}`, '_blank');
+            window.open(`/uploads/${encodeURIComponent(filename)}`, '_blank');
         }
 
         function downloadAttachment() {
@@ -763,7 +761,7 @@
 
         async function deleteDonation(id) {
             if (!confirm('Are you sure you want to delete this 80G certificate request?')) return;
-            const res = await fetch(`${API_BASE_URL}/api/donations-80g/${id}`, { method: 'DELETE', credentials: 'include' });
+            const res = await fetch(`/api/donations-80g/${id}`, { method: 'DELETE' });
             if (res.ok) {
                 if (currentDonationId === id) closeDonationModal();
                 refreshActiveDonationTab();
@@ -782,7 +780,7 @@
 
         async function deleteMessage(id) {
             if (!confirm('Are you sure you want to delete this message?')) return;
-            const res = await fetch(`${API_BASE_URL}/api/messages/${id}`, { method: 'DELETE', credentials: 'include' });
+            const res = await fetch(`/api/messages/${id}`, { method: 'DELETE' });
             if (res.ok) {
                 fetchMessages();
             } else {
@@ -791,8 +789,8 @@
         }
 
         async function logout() {
-            await fetch(`${API_BASE_URL}/api/logout`, { method: 'POST', credentials: 'include' });
-            window.location.href = 'admin-login.html';
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/admin/login';
         }
 
         // Close modal when clicking outside

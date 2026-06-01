@@ -1,13 +1,11 @@
 {
   "name": "pasumai-bharathi-trust",
   "version": "1.0.0",
-  "description": "Pasumai Bharathi Trust Website",
-  "main": "server.js",
-  "engines": {
-    "node": "20.x"
-  },
+  "description": "",
+  "main": "fix.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +13,10 @@
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.2",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "express-session": "^1.18.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "multer": "^1.4.5-lts.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^6.0.1"
   }
 }

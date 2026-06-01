@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const API_BASE_URL = "https://pasumai-bharathi-trust.onrender.com";
-
     // Dynamically load images if running on Live Server
     try {
-      const response = await fetch(`${API_BASE_URL}/images/`);
+      const response = await fetch('images/');
       if (response.ok) {
         const text = await response.text();
         const parser = new DOMParser();
@@ -26,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const cleanUrl = decodeURIComponent(img.split('/').pop());
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.innerHTML = `<img src="${API_BASE_URL}/images/${cleanUrl}" alt="${cleanUrl}" onerror="this.style.display='none'"><div class="gallery-caption">${cleanUrl}</div>`;
+                    item.innerHTML = `<img src="images/${cleanUrl}" alt="${cleanUrl}" onerror="this.style.display='none'"><div class="gallery-caption">${cleanUrl}</div>`;
                     galleryGrid.appendChild(item);
                 });
             } else {
@@ -40,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Dynamically load videos
     try {
-      const response = await fetch(`${API_BASE_URL}/videos/`);
+      const response = await fetch('videos/');
       if (response.ok) {
         const text = await response.text();
         const parser = new DOMParser();
@@ -55,21 +53,39 @@ document.addEventListener("DOMContentLoaded", async () => {
             return vidExts.some(ext => lower.endsWith(ext));
         });
         
-        const videoGrid = document.querySelector('.video-grid') || document.querySelector('.video-box');
+        // Prefer an existing `.video-grid`. If only a single `.video-box` exists
+        // (used on pages with one video), create a proper `.video-grid` container
+        // and move the single video into it. This avoids replacing classes on the
+        // original element which could prevent multiple videos from rendering.
+        let videoGrid = document.querySelector('.video-grid');
+        const videoBox = document.querySelector('.video-box');
+
+        if (!videoGrid && videoBox) {
+          // Create a new grid container and move any existing children into it
+          videoGrid = document.createElement('div');
+          videoGrid.className = 'video-grid';
+          videoBox.parentNode.insertBefore(videoGrid, videoBox);
+          while (videoBox.firstChild) {
+            videoGrid.appendChild(videoBox.firstChild);
+          }
+          // remove the old videoBox container
+          videoBox.parentNode.removeChild(videoBox);
+        }
+
         if (videoGrid) {
-            videoGrid.innerHTML = ''; // Clear hardcoded videos
-            videoGrid.className = 'video-grid'; // Force it to grid to support multiple videos elegantly
-            if (videos.length > 0) {
-                videos.forEach(vid => {
-                    const cleanUrl = decodeURIComponent(vid.split('/').pop());
-                    const item = document.createElement('div');
-                    item.className = 'video-card';
-                    item.innerHTML = `<video controls preload="metadata"><source src="${API_BASE_URL}/videos/${cleanUrl}"></video><div class="gallery-caption">${cleanUrl}</div>`;
-                    videoGrid.appendChild(item);
-                });
-            } else {
-                videoGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No videos uploaded yet.</p>';
-            }
+          // Clear any hardcoded content in the grid
+          videoGrid.innerHTML = '';
+          if (videos.length > 0) {
+            videos.forEach(vid => {
+              const cleanUrl = decodeURIComponent(vid.split('/').pop());
+              const item = document.createElement('div');
+              item.className = 'video-card';
+              item.innerHTML = `<video controls preload="metadata"><source src="videos/${cleanUrl}"></video><div class="gallery-caption">${cleanUrl}</div>`;
+              videoGrid.appendChild(item);
+            });
+          } else {
+            videoGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No videos uploaded yet.</p>';
+          }
         }
       }
     } catch (e) {
